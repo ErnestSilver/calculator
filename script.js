@@ -39,13 +39,15 @@ function operate() {
   return result;
 }
 
+const display = document.getElementById("display");
 const buttons = document.querySelectorAll("button");
+
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    document.getElementById("display").value += button.textContent;
+    display.value += button.textContent;
 
     if (button.textContent === "C") {
-      document.getElementById("display").value = "";
+      display.value = "";
     }
 
     if (
@@ -54,14 +56,15 @@ buttons.forEach((button) => {
       button.textContent === "*" ||
       button.textContent === "/"
     ) {
-      firstNumber = document.getElementById("display").value.slice(0, -1);
+      firstNumber = parseInt(display.value.slice(0, -1));
+      operator = button.textContent;
     }
 
     if (button.textContent === "=") {
-      secondNumber = document
-        .getElementById("display")
-        .value.slice(firstNumber.length + 1, -1);
-      console.log(secondNumber);
+      secondNumber = parseInt(
+        display.value.slice(firstNumber.toString().length + 1, -1)
+      );
+      display.value = operate();
     }
   });
 });
