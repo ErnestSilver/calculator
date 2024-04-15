@@ -14,9 +14,9 @@ function divide(a, b) {
   return a / b;
 }
 
-let firstNumber = 4;
-let operator = "-";
-let secondNumber = 3;
+let firstNumber = 0;
+let operator = "";
+let secondNumber = 0;
 let result = 0;
 
 function operate() {
@@ -39,4 +39,37 @@ function operate() {
   return result;
 }
 
-console.log("Result:", operate());
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    document.getElementById("display").value += button.textContent;
+
+    if (button.textContent === "C") {
+      document.getElementById("display").value = "";
+    }
+
+    if (
+      button.textContent === "+" ||
+      button.textContent === "-" ||
+      button.textContent === "*" ||
+      button.textContent === "/"
+    ) {
+      firstNumber = document.getElementById("display").value.slice(0, -1);
+    }
+
+    if (button.textContent === "=") {
+      secondNumber = document
+        .getElementById("display")
+        .value.slice(firstNumber.length + 1, -1);
+      console.log(secondNumber);
+    }
+  });
+});
+
+// function press(key) {
+//   document.getElementById("display").value += key;
+// }
+
+// function clearDisplay() {
+//   document.getElementById("display").value = "";
+// }
