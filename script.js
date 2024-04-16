@@ -42,37 +42,58 @@ function operate() {
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll("button");
 
+// buttons.forEach((button) => {
+//   button.addEventListener("click", () => {
+//     display.value += button.textContent;
+
+//     if (button.textContent === "C") {
+//       display.value = "";
+//     }
+
+//     if (
+//       button.textContent === "+" ||
+//       button.textContent === "-" ||
+//       button.textContent === "*" ||
+//       button.textContent === "/"
+//     ) {
+//       firstNumber = parseInt(display.value.slice(0, -1));
+//       operator = button.textContent;
+//     }
+
+//     if (button.textContent === "=") {
+//       secondNumber = parseInt(
+//         display.value.slice(firstNumber.toString().length + 1, -1)
+//       );
+//       display.value = operate();
+//     }
+//   });
+// });
+
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     display.value += button.textContent;
 
-    if (button.textContent === "C") {
-      display.value = "";
-    }
+    switch (button.textContent) {
+      case "C":
+        display.value = "";
+        break;
 
-    if (
-      button.textContent === "+" ||
-      button.textContent === "-" ||
-      button.textContent === "*" ||
-      button.textContent === "/"
-    ) {
-      firstNumber = parseInt(display.value.slice(0, -1));
-      operator = button.textContent;
-    }
+      case "+":
+      case "-":
+      case "*":
+      case "/":
+        firstNumber = parseInt(display.value.slice(0, -1));
+        operator = button.textContent;
+        break;
+      case "=":
+        secondNumber = parseInt(
+          display.value.slice(firstNumber.toString().length + 1, -1)
+        );
+        display.value = operate();
+        break;
 
-    if (button.textContent === "=") {
-      secondNumber = parseInt(
-        display.value.slice(firstNumber.toString().length + 1, -1)
-      );
-      display.value = operate();
+      default:
+        break;
     }
   });
 });
-
-// function press(key) {
-//   document.getElementById("display").value += key;
-// }
-
-// function clearDisplay() {
-//   document.getElementById("display").value = "";
-// }
