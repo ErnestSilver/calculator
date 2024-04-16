@@ -63,8 +63,8 @@ buttons.forEach((button) => {
       case "-":
       case "*":
       case "/":
-        operator = button.textContent;
         if (usedAdd === 0) {
+          operator = button.textContent;
           firstNumber = parseInt(displayNumber);
           displayNumber = 0;
           usedAdd = 1;
@@ -73,6 +73,7 @@ buttons.forEach((button) => {
           displayNumber = 0;
           total = operate();
           firstNumber = total;
+          operator = button.textContent;
           display.value = firstNumber + operator;
         }
         break;
